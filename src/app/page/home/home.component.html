@@ -1,0 +1,49 @@
+<ScrollView *ngIf="!isBusy">
+    <GridLayout [class.dialogOpen]="dialogOpen">
+        <StackLayout class="bg-page" padding="0" padding="0 0 50 0">
+            <GridLayout rows="auto,auto,auto" columns="*,auto" class="bg-content" row="0">
+                <Label row="0" margin="10 0 10 20" col="0" class="fas h2 t-index ver bold"
+                    text="Pasar Cikalong"></Label>
+                <GridLayout columns="40,40" margin="10 20 0 0" row="0" col="1" orientation="horizontal">
+                    <Label col="0" class="fas ver center t-index h2" text="&#xf004;"
+                        [nsRouterLink]="['/favorit']"></Label>
+                    <Label col="1" class="fas ver center t-index h2" text="&#xf07a;" [nsRouterLink]="['/keranjang']"></Label>
+                </GridLayout>
+            </GridLayout>
+            <GridLayout rows="auto">
+                <StackLayout row="0">
+                    <ScrollView scrollBarIndicatorVisible="false">
+                        <FlexboxLayout flexWrap="wrap" width="100%">
+                            <StackLayout *ngFor="let item of data" width="{{photoWidth}}" padding="5 5 5 5">
+                                <GridLayout rows="auto,auto" height="200" class="bg-content" androidElevation="5"
+                                    width="{{photoWidth}}" margin="5 5 5 5" [nsRouterLink]="['/produk', item.id_barang]">
+                                    <Image row="0" height="140" borderRadius="10" src="{{item.gambar}}" stretch="aspectFit">
+                                    </Image>
+                                    <GridLayout row="1" columns="*,auto">
+                                        <StackLayout col="0">
+                                            <Label padding="0 0 0 10" class="h4 bold" text="{{item.nama}}"></Label>
+                                            <Label padding="0 0 0 10"
+                                                visibility="{{ item.dis>0 ? 'visible' : 'collapsed' }}">
+                                                <FormattedString>
+                                                    <Span text="Dis {{item.dis}}%  " class="h6 t-success"></Span>
+                                                    <Span class="h6 t-disc"
+                                                        text="Rp {{formatDollar(item.harga)}}"></Span>
+                                                </FormattedString>
+                                            </Label>
+                                            <Label padding="0 0 0 10" class="h4 bold t-color"
+                                                text="Rp {{item.dis>0 ? formatDollar(item.harga_dis):formatDollar(item.harga)}}"></Label>
+                                        </StackLayout>
+                                    </GridLayout>
+                                </GridLayout>
+                            </StackLayout>
+                        </FlexboxLayout>
+                    </ScrollView>
+                </StackLayout>
+            </GridLayout>
+        </StackLayout>
+    </GridLayout>
+</ScrollView>
+<GridLayout style="vertical-align: middle;" *ngIf="isBusy">
+    <ActivityIndicator row="1" #activityIndicator busy="true" width="100" height="100" class="activity-indicator">
+    </ActivityIndicator>
+</GridLayout>

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "377214316092",
+    "project_id": "sikedai-a2440",
+    "storage_bucket": "sikedai-a2440.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:377214316092:android:5aee5e1462e6e7fff1dd39",
+        "android_client_info": {
+          "package_name": "com.melong.sikedai"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "377214316092-4nr964522pt0br68ehol0d8f0f32bg3i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvATgnxkXbIOzjHJHRrMnWRbPdjdYTEeA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "377214316092-4nr964522pt0br68ehol0d8f0f32bg3i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

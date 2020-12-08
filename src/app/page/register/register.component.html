@@ -1,0 +1,44 @@
+<GridLayout *ngIf="!isBusy" rows="*,auto" class="bg-page">
+    <ScrollView row="0">
+        <GridLayout height="100%" rows="*">
+            <GridLayout row="0" rows="auto,auto,auto" class="bg-content middle" margin="15" padding="10">
+                <GridLayout width="100" height="100" rows="*" borderRadius="25" margin="15" class="labels">
+                    <StackLayout class="middle" row="0">
+                        <Label row="0" text="Sikedai" class="h2 text-center middle bold t-color"></Label>
+                    </StackLayout>
+                </GridLayout>
+                <StackLayout row="1">
+                    <Label class="text-center h2" text="Sign-Up"></Label>
+                    <TextField [(ngModel)]="nama" padding="15" margin="15" androidElevation="5"
+                        hint="&#xf54e; Nama Toko" class="input fas">
+                    </TextField>
+                    <TextField [(ngModel)]="alamat" padding="15" margin="15" androidElevation="5" hint="&#xf5a0; Alamat"
+                        class="input fas"></TextField>
+                    <TextField [(ngModel)]="telepon" padding="15" margin="15" keyboardType="phone" androidElevation="5"
+                        hint="&#xf095; No. Telepon" class="input fas">
+                    </TextField>
+                    <TextField [(ngModel)]="email" padding="15" margin="15" keyboardType="email" androidElevation="5"
+                        hint="&#xf0e0; Email" class="input fas"></TextField>
+                    <TextField [(ngModel)]="password" secure="true" padding="15" margin="15" androidElevation="5"
+                        hint="&#xf084; Password" class="input fas">
+                    </TextField>
+                </StackLayout>
+                <GridLayout row="2" rows="auto">
+                    <Button row="0" (tap)="submit()" text="Register" class="btn"></Button>
+                </GridLayout>
+            </GridLayout>
+        </GridLayout>
+    </ScrollView>
+    <GridLayout row="1" rows="auto" margin="0 0 15 0" class="middle">
+        <Label row="0" class="text-center" [nsRouterLink]="['/login']">
+            <FormattedString>
+                <Span text="Sudah memiliki akun ? "></Span>
+                <Span text="Login" class="t-link"></Span>
+            </FormattedString>
+        </Label>
+    </GridLayout>
+</GridLayout>
+<GridLayout style="vertical-align: middle;" *ngIf="isBusy">
+    <ActivityIndicator row="1" #activityIndicator busy="true" width="100" height="100" class="activity-indicator">
+    </ActivityIndicator>
+</GridLayout>

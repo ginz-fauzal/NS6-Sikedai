@@ -1,0 +1,89 @@
+<ScrollView class="bg-page" scrollBarIndicatorVisible="false">
+    <GridLayout rows="auto,auto,*,auto" visibility="{{ !isBusy ? 'visible' : 'collapsed' }}">
+        <!-- Profile -->
+        <StackLayout visibility="{{ !formgp && !fromProfil ? 'visible' : 'collapsed' }}">
+            <StackLayout>
+                <StackLayout class="bg-content" margin="15" padding="10" androidElevation="5">
+                    <GridLayout rows="auto,auto" columns="auto,*">
+                        <Image row="0" col="0" margin="0 20 0 0" rowSpan="2" src="{{gambar}}" borderRadius="100%"
+                            stretch="aspectFill" width="50" height="50"></Image>
+                        <Label row="0" col="1" class="bold h3" text="{{nama}}"></Label>
+                        <Label row="1" col="1" class="h4" text="{{email}}"></Label>
+                    </GridLayout>
+                </StackLayout>
+            </StackLayout>
+            <GridLayout rows="65,65,65">
+                <GridLayout row="1" columns="60,*" class="bg-content" padding="2" margin="10 20 10 20"
+                    androidElevation="5">
+                    <Button col="0" text="&#xf084;" margin="0" borderRadius="50" width="30" height="30"
+                        class="fas t-white bg h4 center middle" (tap)="formgantipassword()"></Button>
+                    <Label col="1" text="Ganti Password" textWrap="true" class="h4 middle"
+                        (tap)="formgantipassword()"></Label>
+                </GridLayout>
+                <GridLayout row="0" columns="60,*" class="bg-content" padding="2" margin="10 20 10 20"
+                    androidElevation="5">
+                    <Button col="0" text="&#xf044;" margin="0" borderRadius="50" width="30" height="30"
+                        class="fas t-white bg h4 center middle" (tap)="bukaEdit()"></Button>
+                    <Label col="1" text="Edit Profil" textWrap="true" class="h4 middle" (tap)="bukaEdit()"></Label>
+                </GridLayout>
+                <GridLayout row="2" columns="60,*" class="bg-content" padding="2" margin="10 20 10 20"
+                    androidElevation="5">
+                    <Button col="0" text="&#xf011;" margin="0" borderRadius="50" width="30" height="30"
+                        class="fas t-white bg h4 center middle" (tap)="logout()"></Button>
+                    <Label col="1" text="logout" textWrap="true" class="h4 middle" (tap)="bukaEdit()"></Label>
+                </GridLayout>
+            </GridLayout>
+            <GridLayout>
+                <Label class="h3 center" text="Sikedai"></Label>
+            </GridLayout>
+        </StackLayout>
+        <!-- Ganti Pass -->
+        <StackLayout row="2" visibility="{{ formgp && !fromProfil ? 'visible' : 'collapsed' }}">
+            <Label class="h3 text-center bold" text="Ganti Password"></Label>
+            <GridLayout rows="auto,auto">
+                <TextField row="0" padding="15" margin="15" androidElevation="5" secure="true" hint="Password Lama"
+                    class="input h4" [(ngModel)]="passlama">
+                </TextField>
+                <TextField row="1" padding="15" margin="15" androidElevation="5" secure="true" hint="Password Baru"
+                    class="input h4" [(ngModel)]="passbaru">
+                </TextField>
+            </GridLayout>
+            <Button width="150" height="40" class="btn-warning fas" (tap)="gantipassword()" text="&#xf0c7; Simpan"
+                borderRadius="10"></Button>
+            <Button width="150" height="40" class="btn-warning-soft fas" (tap)="batal()" text="&#xf00d; Batal"
+                borderRadius="10"></Button>
+        </StackLayout>
+        <!-- Edit Profile -->
+        <StackLayout row="2" visibility="{{ fromProfil ? 'visible' : 'collapsed' }}">
+            <Label class="h4 bold center" text="Edit Profil"></Label>
+            <Button text="&#xf03e;" *ngIf="gambars" class="fas menu-icon bg"
+                (tap)="onSelectImageTap($event)"></Button>
+            <Label class="h4 bold center" text="Upload Foto"></Label>
+            <Image src="{{image}}" stretch="aspectFill" (tap)="onSelectImageTap($event)" width="150" height="150"
+                visibility="{{ !gambars ? 'visible' : 'collapsed' }}"></Image>
+            <GridLayout rows="auto,auto,auto,auto,auto">
+                <TextField padding="15" margin="15" androidElevation="5" row="0" hint="Nama" text={{nama}}
+                    class="input h4" [(ngModel)]="nama">
+                </TextField>
+                <TextField padding="15" margin="15" androidElevation="5" row="1" editable="false" text={{email}}
+                    hint="Email" class="input h4" [(ngModel)]="email">
+                </TextField>
+                <TextField padding="15" margin="15" androidElevation="5" row="2" keyboardType="number" text={{telepon}}
+                    hint="Telepon" class="input h4" [(ngModel)]="telepon"></TextField>
+                <TextField padding="15" margin="15" androidElevation="5" row="3" hint="Alamat"
+                    text={{alamat}} class="input h4" [(ngModel)]="alamat"></TextField>
+                <!-- <DatePickerField row="4" class="input h4" [(ngModel)]="tanggal_lahir"
+                    dateFormat="yyyy-MM-dd" hint="select date"></DatePickerField> -->
+            </GridLayout>
+            <Button width="150" height="40" class="btn-warning fas" (tap)="gantiprofil()" text="&#xf0c7; Simpan"
+                borderRadius="10"></Button>
+            <Button width="150" height="40" class="btn-warning-soft fas" (tap)="bukaEdit()" text="&#xf00d; Batal"
+                borderRadius="10"></Button>
+        </StackLayout>
+    </GridLayout>
+</ScrollView>
+<DockLayout style="vertical-align: middle;">
+    <ActivityIndicator row="1" visibility="{{ isBusy ? 'visible' : 'collapsed' }}" #activityIndicator busy="true"
+        width="100" height="100" class="activity-indicator">
+    </ActivityIndicator>
+</DockLayout>

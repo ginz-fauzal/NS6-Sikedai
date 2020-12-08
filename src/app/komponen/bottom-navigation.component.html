@@ -1,0 +1,23 @@
+<GridLayout columns="*, *, *, *" visibility="{{ hiddens() ? 'visible' : 'collapsed' }}"
+    class="bottom-navigation">
+    <GridLayout col="0" rows="auto, *" class="bottom-navigation-item" [class.selected]="isComponentSelected('/home')"
+        (tap)="onNavItemTap('/home')">
+        <Label row="0" text="&#xf015;" class="fas"></Label>
+        <Label row="1" text="Home" class="label"></Label>
+    </GridLayout>
+    <GridLayout col="1" rows="auto, *" class="bottom-navigation-item"
+        [class.selected]="isComponentSelected('/keranjang')" (tap)="onNavItemTap('/keranjang')">
+        <Label row="0" text="&#xf07a;" class="fas"></Label>
+        <Label row="1" text="Keranjang" class="label"></Label>
+    </GridLayout>
+    <GridLayout col="2" rows="auto, *" class="bottom-navigation-item"
+        [class.selected]="isComponentSelected('/transaksi')" (tap)="onNavItemTap('/transaksi')">
+        <Label row="0" text="&#xf15c;" class="fas"></Label>
+        <Label row="1" text="Transaksi" class="label"></Label>
+    </GridLayout>
+    <GridLayout col="3" rows="auto, *" class="bottom-navigation-item" [class.selected]="isComponentSelected('/akun')"
+        (tap)="onNavItemTap('/akun')">
+        <Label row="0" text="&#xf007;" class="fas"></Label>
+        <Label row="1" text="Akun" class="label"></Label>
+    </GridLayout>
+</GridLayout>
