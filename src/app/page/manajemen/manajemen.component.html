@@ -1,0 +1,43 @@
+<ScrollView class="bg-page" scrollBarIndicatorVisible="false">
+    <GridLayout rows="auto,auto,*,auto" visibility="{{ !isBusy ? 'visible' : 'collapsed' }}">
+        <!-- Profile -->
+        <StackLayout>
+            <StackLayout>
+                <StackLayout class="bg-content" margin="15" padding="10" androidElevation="5">
+                    <Label class="h2 bold text-center t-index" text="Manajemen Toko"></Label>
+                </StackLayout>
+            </StackLayout>
+            <GridLayout rows="65,65,65,65">
+                <GridLayout row="0" columns="60,*" class="bg-content" padding="2" margin="10 20 10 20"
+                    androidElevation="5" [nsRouterLink]="['/barang']">
+                    <Button col="0" text="&#xf1b3;" margin="0" borderRadius="50" width="30" height="30"
+                        class="fas t-white bg h4 center middle"></Button>
+                    <Label col="1" text="Manajemen Barang" textWrap="true" class="h4 middle"></Label>
+                </GridLayout>
+                <GridLayout row="1" columns="60,*" class="bg-content" padding="2" margin="10 20 10 20"
+                    androidElevation="5" [nsRouterLink]="['/stok']">
+                    <Button col="0" text="&#xf468;" margin="0" borderRadius="50" width="30" height="30"
+                        class="fas t-white bg h4 center middle"></Button>
+                    <Label col="1" text="Manajemen Stok" textWrap="true" class="h4 middle"></Label>
+                </GridLayout>
+                <GridLayout row="2" columns="60,*" class="bg-content" (tap)="belumada()" padding="2" margin="10 20 10 20"
+                    androidElevation="5">
+                    <Button col="0" text="&#xf5fd;" margin="0" borderRadius="50" width="30" height="30"
+                        class="fas t-white bg h4 center middle"></Button>
+                    <Label col="1" text="Manajemen Etalase" textWrap="true" class="h4 middle"></Label>
+                </GridLayout>
+                <GridLayout row="3" columns="60,*" class="bg-content" (tap)="belumada()" padding="2" margin="10 20 10 20"
+                    androidElevation="5">
+                    <Button col="0" text="&#xf02b;" margin="0" borderRadius="50" width="30" height="30"
+                        class="fas t-white bg h4 center middle"></Button>
+                    <Label col="1" text="Manajemen Kategori" textWrap="true" class="h4 middle"></Label>
+                </GridLayout>
+            </GridLayout>
+        </StackLayout>
+    </GridLayout>
+</ScrollView>
+<DockLayout style="vertical-align: middle;">
+    <ActivityIndicator row="1" visibility="{{ isBusy ? 'visible' : 'collapsed' }}" #activityIndicator busy="true"
+        width="100" height="100" class="activity-indicator">
+    </ActivityIndicator>
+</DockLayout>

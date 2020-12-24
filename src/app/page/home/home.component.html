@@ -1,49 +1,90 @@
-<ScrollView *ngIf="!isBusy">
-    <GridLayout [class.dialogOpen]="dialogOpen">
-        <StackLayout class="bg-page" padding="0" padding="0 0 50 0">
-            <GridLayout rows="auto,auto,auto" columns="*,auto" class="bg-content" row="0">
-                <Label row="0" margin="10 0 10 20" col="0" class="fas h2 t-index ver bold"
-                    text="Pasar Cikalong"></Label>
-                <GridLayout columns="40,40" margin="10 20 0 0" row="0" col="1" orientation="horizontal">
-                    <Label col="0" class="fas ver center t-index h2" text="&#xf004;"
-                        [nsRouterLink]="['/favorit']"></Label>
-                    <Label col="1" class="fas ver center t-index h2" text="&#xf07a;" [nsRouterLink]="['/keranjang']"></Label>
+<GridLayout rows="auto,*,auto" class="bg-page" visibility="{{ !isBusy && !bayar ? 'visible' : 'collapsed' }}">
+    <GridLayout marginBottom="5" row="0" columns="*,auto" class="bg-content">
+        <Label col="0" margin="10 0 10 20" text="Transaksi Toko" class="fas h2 t-index ver bold"></Label>
+        <Label col="1" text="&#xf0f3;" margin="10 20 0 0" class="fas ver center t-index h2"></Label>
+    </GridLayout>
+    <ScrollView row="1">
+        <StackLayout>
+            <StackLayout>
+                <GridLayout *ngFor="let item of data" visibility="{{ item.stok!=0 ? 'visible' : 'collapsed' }}"
+                    class="bg-content" margin="10 15 5 15" padding="10" columns="auto,*,auto">
+                    <Image col="0" margin="0 20 0 0" src="{{item.gambar}}" stretch="aspectFill" width="50" height="50">
+                    </Image>
+                    <StackLayout col="1" class="middle">
+                        <Label text="{{item.nama_barang}}" class="fas h3 t-index bold"></Label>
+                        <Label text="Stok : Rp {{formatDollar(item.stok)}}"></Label>
+                        <Label text="Harga : Rp {{formatDollar(item.harga_jual)}}"></Label>
+                    </StackLayout>
+                    <GridLayout verticalAlignment="bottom" col="2" columns="auto,60,auto">
+                        <Label col="0" text="&#xf146;" (tap)="kurang(item.index)"
+                            class="fas middle right h2 t-color"></Label>
+                        <TextField padding="0" col="1" text="{{item.jumlah}}" keyboardType="number"
+                            class="h3 text-center middle">
+                        </TextField>
+                        <Label col="2" text="&#xf0fe;" (tap)="tambah(item.index)"
+                            class="fas middle left h2 t-color"></Label>
+                    </GridLayout>
                 </GridLayout>
-            </GridLayout>
-            <GridLayout rows="auto">
-                <StackLayout row="0">
-                    <ScrollView scrollBarIndicatorVisible="false">
-                        <FlexboxLayout flexWrap="wrap" width="100%">
-                            <StackLayout *ngFor="let item of data" width="{{photoWidth}}" padding="5 5 5 5">
-                                <GridLayout rows="auto,auto" height="200" class="bg-content" androidElevation="5"
-                                    width="{{photoWidth}}" margin="5 5 5 5" [nsRouterLink]="['/produk', item.id_barang]">
-                                    <Image row="0" height="140" borderRadius="10" src="{{item.gambar}}" stretch="aspectFit">
-                                    </Image>
-                                    <GridLayout row="1" columns="*,auto">
-                                        <StackLayout col="0">
-                                            <Label padding="0 0 0 10" class="h4 bold" text="{{item.nama}}"></Label>
-                                            <Label padding="0 0 0 10"
-                                                visibility="{{ item.dis>0 ? 'visible' : 'collapsed' }}">
-                                                <FormattedString>
-                                                    <Span text="Dis {{item.dis}}%  " class="h6 t-success"></Span>
-                                                    <Span class="h6 t-disc"
-                                                        text="Rp {{formatDollar(item.harga)}}"></Span>
-                                                </FormattedString>
-                                            </Label>
-                                            <Label padding="0 0 0 10" class="h4 bold t-color"
-                                                text="Rp {{item.dis>0 ? formatDollar(item.harga_dis):formatDollar(item.harga)}}"></Label>
-                                        </StackLayout>
-                                    </GridLayout>
-                                </GridLayout>
-                            </StackLayout>
-                        </FlexboxLayout>
-                    </ScrollView>
-                </StackLayout>
-            </GridLayout>
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+    <GridLayout row="2" class="bg-content" columns="*,auto">
+        <StackLayout col="0" paddingLeft="20">
+            <Label class="bold h3" text="Jml Barang : {{formatDollar(jumlah)}}"></Label>
+            <Label class="bold h3" text="Total : Rp {{formatDollar(total)}}"></Label>
+        </StackLayout>
+        <Button col="1" width="150" height="40" class="btn-warning fas" (tap)="next()" text="Next &#xf061;"
+            borderRadius="10"></Button>
+    </GridLayout>
+</GridLayout>
+<GridLayout rows="auto,*,auto" class="bg-page" visibility="{{ !isBusy && bayar ? 'visible' : 'collapsed' }}">
+    <GridLayout marginBottom="5" row="0" columns="*,auto" class="bg-content">
+        <Label (tap)="kembali()" col="0" margin="10 0 10 20" text="&#xf060;  Pembayaran" class="fas h2 t-index ver bold"></Label>
+    </GridLayout>
+    <GridLayout row="1" rows="auto,*">
+        <GridLayout row="0" columns="*,auto">
+            <StackLayout col="0" paddingLeft="20">
+                <Label class="bold h3" text="Jml Barang : {{formatDollar(jumlah)}}"></Label>
+                <Label class="bold h3" text="Total : Rp {{formatDollar(total)}}"></Label>
+            </StackLayout>
+            <Button col="1" width="150" height="40" class="btn-warning fas" (tap)="detail()" text="Detail &#xf06e;"
+                borderRadius="10"></Button>
+        </GridLayout>
+        <StackLayout row="1" class="middle">
+            <Label text="Nominal" class="h3 bold text-center"></Label>
+            <Label text="Rp {{formatDollar(bayaran)}}" class="h2 bold text-center"></Label>
         </StackLayout>
     </GridLayout>
-</ScrollView>
-<GridLayout style="vertical-align: middle;" *ngIf="isBusy">
+    <GridLayout paddingTop="15" row="2" class="bg-content" rows="60,60,60,60,auto" columns="*,*,*">
+        <Button row="0" col="0" height="50" class="btn h2" (tap)="numbertap('1')" text="1"
+            borderRadius="50"></Button>
+        <Button row="0" col="1" height="50" class="btn h2" (tap)="numbertap('2')" text="2"
+            borderRadius="50"></Button>
+        <Button row="0" col="2" height="50" class="btn h2" (tap)="numbertap('3')" text="3"
+            borderRadius="50"></Button>
+        <Button row="1" col="0" height="50" class="btn h2" (tap)="numbertap('4')" text="4"
+            borderRadius="50"></Button>
+        <Button row="1" col="1" height="50" class="btn h2" (tap)="numbertap('5')" text="5"
+            borderRadius="50"></Button>
+        <Button row="1" col="2" height="50" class="btn h2" (tap)="numbertap('6')" text="6"
+            borderRadius="50"></Button>
+        <Button row="2" col="0" height="50" class="btn h2" (tap)="numbertap('7')" text="7"
+            borderRadius="50"></Button>
+        <Button row="2" col="1" height="50" class="btn h2" (tap)="numbertap('8')" text="8"
+            borderRadius="50"></Button>
+        <Button row="2" col="2" height="50" class="btn h2" (tap)="numbertap('9')" text="9"
+            borderRadius="50"></Button>
+        <Button row="3" col="0" height="50" class="btn h2" (tap)="numbertap('0')" text="0"
+            borderRadius="50"></Button>
+        <Button row="3" col="1" height="50" class="btn h2" (tap)="numbertap('00')" text="00"
+            borderRadius="50"></Button>
+        <Button row="3" col="2" height="50" class="btn h2 fas" (tap)="hapus()" text="&#xf137;" borderRadius="50"></Button>
+
+        <Button row="4" colSpan="3" col="0" width="150" height="40" class="btn-warning fas h2" (tap)="bayarkan()"
+            text="Bayar" borderRadius="10"></Button>
+    </GridLayout>
+</GridLayout>
+<DockLayout style="vertical-align: middle;" visibility="{{ isBusy ? 'visible' : 'collapsed' }}">
     <ActivityIndicator row="1" #activityIndicator busy="true" width="100" height="100" class="activity-indicator">
     </ActivityIndicator>
-</GridLayout>
+</DockLayout>

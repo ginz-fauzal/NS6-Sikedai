@@ -1,0 +1,12 @@
+<GridLayout rows="auto,*" class="bg-page" visibility="{{ !isBusy && !form ? 'visible' : 'collapsed' }}">
+    <GridLayout row="0" marginBottom="5" paddingBottom="10" columns="*" class="bg-content">
+        <Label col="0" margin="10 0 10 20" text="Laporan Penjualan" class="fas h2 t-index ver bold"></Label>
+        </GridLayout>
+    <ScrollView row="1">
+       
+    </ScrollView>
+</GridLayout>
+<DockLayout style="vertical-align: middle;" visibility="{{ isBusy ? 'visible' : 'collapsed' }}">
+    <ActivityIndicator row="1" #activityIndicator busy="true" width="100" height="100" class="activity-indicator">
+    </ActivityIndicator>
+</DockLayout>

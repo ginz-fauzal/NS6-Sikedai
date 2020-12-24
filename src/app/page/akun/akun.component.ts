@@ -2,7 +2,6 @@ import { Component, OnInit } from "@angular/core";
 import { RouterExtensions } from "nativescript-angular/router";
 import { Page } from "tns-core-modules/ui/page";
 import * as ApplicationSettings from "tns-core-modules/application-settings";
-import { Location } from "@angular/common";
 import { request } from "tns-core-modules/http";
 import { File } from "tns-core-modules/file-system";
 import * as bgHttp from "nativescript-background-http";
@@ -30,7 +29,6 @@ export class AkunComponent implements OnInit {
     passlama:string;
 
     // System
-    dateTime1: Date = new Date();
     isBusy = false;
     formgp:boolean=false;
     fromProfil:boolean=false; 
@@ -49,7 +47,7 @@ export class AkunComponent implements OnInit {
         // emit only logs for the this.currentFileNameBeingUploaded
         map(allLogs => allLogs.filter(logEntry => !!logEntry && logEntry.eventTitle && logEntry.eventTitle.indexOf(this.currentFileNameBeingUploaded) > 0)));
 
-    constructor(private _routerExtensions: RouterExtensions, private location: Location,private page: Page) {
+    constructor(private _routerExtensions: RouterExtensions, private page: Page) {
         this.nama=ApplicationSettings.getString("nama");
         this.email=ApplicationSettings.getString("email");
         this.push=ApplicationSettings.getString("push");
@@ -224,10 +222,10 @@ export class AkunComponent implements OnInit {
         });
     }
 
-    private onEvent(e) {
+    public onEvent(e) {
         if(e.eventName.toString()=="complete"){
             this.isBusy=false;
-    }
+        }
         this.event.next({
             eventTitle: e.eventName + " " + e.object.description,
             eventData: {
@@ -240,10 +238,6 @@ export class AkunComponent implements OnInit {
             
         });
         
-    }
-
-    imgmenu(str){
-        return str.charAt(0)+str.charAt(1);
     }
 
     getdata(){

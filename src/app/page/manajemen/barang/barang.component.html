@@ -1,0 +1,70 @@
+<GridLayout rows="auto,*" class="bg-page" visibility="{{ !isBusy && !form ? 'visible' : 'collapsed' }}">
+    <GridLayout row="0" marginBottom="5" columns="*,auto" class="bg-content">
+        <Label col="0" margin="10 0 10 20" text="Manajemen Barang" class="fas h2 t-index ver bold"></Label>
+        <Label col="1" text="&#xf067;" margin="10 20 0 0" class="fas ver center t-index h2" (tap)="formShow()"></Label>
+    </GridLayout>
+    <ScrollView row="1">
+        <StackLayout>
+            <GridLayout *ngFor="let item of data" class="bg-content" margin="10 15 5 15" padding="10" columns="auto,*">
+                <Image col="0" margin="0 20 0 0" src="{{item.gambar}}" stretch="aspectFill" width="50" height="50">
+                </Image>
+                <StackLayout col="1" class="middle">
+                    <GridLayout columns="*,auto">
+                        <Label col="0" text="{{item.nama_barang}}" class="fas h3 t-index bold"></Label>
+                        <Label col="1" text="&#xf044;" margin="0 20 0 0" class="fas center t-index h3" (tap)="barangtap(item.id_barang)"></Label>
+                    </GridLayout>
+                    <Label text="Kategori : {{item.kategori}}"></Label>
+                    <GridLayout columns="*,*">
+                        <Label col="0" class="t-index" text="Harga dasar"></Label>
+                        <Label col="1" class="t-index" text="Harga Jual"></Label>
+                    </GridLayout>
+                    <GridLayout columns="*,*">
+                        <Label col="0" text="Rp {{formatDollar(item.harga_dasar)}}"></Label>
+                        <Label col="1" text="Rp {{formatDollar(item.harga_jual)}}"></Label>
+                    </GridLayout>
+                </StackLayout>
+            </GridLayout>
+        </StackLayout>
+    </ScrollView>
+</GridLayout>
+<!-- Form -->
+<GridLayout rows="auto,*" class="bg-page" visibility="{{ form && !isBusy ? 'visible' : 'collapsed' }}">
+    <GridLayout row="0" columns="*,auto" class="bg-content">
+        <Label col="0" margin="10 0 10 20" text="Tambah Barang" class="fas h2 t-index text-center bold"></Label>
+    </GridLayout>
+    <ScrollView row="1">
+        <StackLayout>
+            <Button text="&#xf03e;" *ngIf="setgambar" class="fas menu-icon bg" (tap)="onSelectImageTap($event)"></Button>
+            <Label class="h4 bold center" text="Upload Foto"></Label>
+            <Image src="{{gambar}}" stretch="aspectFill" (tap)="onSelectImageTap($event)" width="150" height="150"
+            *ngIf="!setgambar"></Image>
+            <TextField padding="15" margin="15" androidElevation="5" row="0" hint="Nama Barang" class="input h4"
+                [(ngModel)]="nama_barang">
+            </TextField>
+            <TextField editable="false" id="menuBtn" (tap)="buttonTap()" padding="15" margin="15" androidElevation="5" row="0" hint="Kategori" class="input h4"
+                [(ngModel)]="kategori">
+            </TextField>
+            <GridLayout columns="*,*">
+                <TextField col="0" padding="15" margin="15" androidElevation="5" row="0" hint="Harga Dasar"
+                    class="input h4" keyboardType="number" [(ngModel)]="harga_dasar">
+                </TextField>
+                <TextField col="1" padding="15" margin="15" androidElevation="5" row="0" hint="Harga Jual"
+                    class="input h4" keyboardType="number" [(ngModel)]="harga_jual">
+                </TextField>
+            </GridLayout>
+            <TextField padding="15" margin="15" androidElevation="5" row="0" hint="Keterangan" class="input h4"
+                [(ngModel)]="keterangan">
+            </TextField>
+            <Button width="150" height="40" class="btn-warning fas" *ngIf="!edit" (tap)="simpan()" text="&#xf0c7; Simpan"
+                borderRadius="10"></Button>
+                <Button width="150" height="40" class="btn-warning fas" *ngIf="edit" (tap)="update()" text="&#xf0c7; Update"
+                borderRadius="10"></Button>
+            <Button width="150" height="40" class="btn-warning-soft fas" (tap)="formClose()" text="&#xf00d; Batal"
+                borderRadius="10"></Button>
+        </StackLayout>
+    </ScrollView>
+</GridLayout>
+<DockLayout style="vertical-align: middle;" visibility="{{ isBusy ? 'visible' : 'collapsed' }}">
+    <ActivityIndicator row="1" #activityIndicator busy="true" width="100" height="100" class="activity-indicator">
+    </ActivityIndicator>
+</DockLayout>
