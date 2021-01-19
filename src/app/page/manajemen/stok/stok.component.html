@@ -1,7 +1,7 @@
-<GridLayout rows="auto,*,auto" class="bg-page" visibility="{{ !isBusy && !form ? 'visible' : 'collapsed' }}">
+<GridLayout rows="auto,*,auto" class="bg-page" visibility="{{ !isBusy ? 'visible' : 'collapsed' }}">
     <GridLayout row="0" marginBottom="5" paddingBottom="10" columns="*" class="bg-content">
         <Label col="0" margin="10 0 10 20" text="Stok Barang" class="fas h2 t-index ver bold"></Label>
-        </GridLayout>
+    </GridLayout>
     <ScrollView row="1">
         <StackLayout>
             <GridLayout *ngFor="let item of data" class="bg-content" margin="10 15 5 15" padding="10" columns="auto,*">
@@ -11,14 +11,21 @@
                     <GridLayout columns="*,auto">
                         <Label col="0" text="{{item.nama_barang}}" class="fas h3 t-index bold"></Label>
                     </GridLayout>
-                    <GridLayout columns="*,*">
+                    <GridLayout columns="*,auto">
                         <StackLayout col="0">
-                            <Label class="t-index" text="Harga dasar"></Label>
-                            <Label class="bold" text="Rp {{formatDollar(item.harga_dasar)}}"></Label>
+                            <Label text="Harga dasar : Rp {{formatDollar(item.harga_dasar)}}"></Label>
+                            <Label text="Stok : {{formatDollar(item.stok_lama)}}"></Label>
                         </StackLayout>
-                        <TextField col="1" padding="10" androidElevation="5" margin="5" hint="Stok" class="input h3 text-center"
-                            keyboardType="number" [(ngModel)]="item.stok">
-                        </TextField>
+                        <GridLayout verticalAlignment="bottom" col="1" columns="auto,60,auto">
+                            <Label col="0" text="&#xf146;" (tap)="kurang(item.index)"
+                                class="fas middle right h2 t-color"></Label>
+                            <TextField padding="0" col="1" keyboardType="number"
+                                (returnPress)="onReturnPress($event,item.index)" class="h3 text-center middle"
+                                [(ngModel)]="item.jumlah" returnKeyType="done">
+                            </TextField>
+                            <Label col="2" text="&#xf0fe;" (tap)="tambah(item.index)"
+                                class="fas middle left h2 t-color"></Label>
+                        </GridLayout>
                     </GridLayout>
                 </StackLayout>
             </GridLayout>

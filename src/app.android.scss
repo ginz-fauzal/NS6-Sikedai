@@ -79,9 +79,10 @@
 //FORM
 .input{
     border-radius: 10;
-    border-width: 0.5;
-    border-color: #FFFFFF;
-    background-color: white;
+    border-width: 0.3;
+    border-color: #4d4d4d;
+    background-color: #FFFFFF;
+    color: black;
 }
 
 .tab{
@@ -116,6 +117,15 @@
     border-radius: 100%;
     background-color: #0170c2;
     color: white;
+}
+
+.borders{
+    border-width: 0.5;
+    border-radius: 10 ;
+    border-color: #616161;
+    background-color: white;
+    padding: 5;
+    margin-bottom: 10;
 }
 
 .labels{

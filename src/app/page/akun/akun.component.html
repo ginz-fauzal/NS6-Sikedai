@@ -12,25 +12,31 @@
                     </GridLayout>
                 </StackLayout>
             </StackLayout>
-            <GridLayout rows="65,65,65">
+            <GridLayout rows="65,65,65,65">
                 <GridLayout row="1" columns="60,*" class="bg-content" padding="2" margin="10 20 10 20"
-                    androidElevation="5">
+                    androidElevation="5" (tap)="formgantipassword()">
                     <Button col="0" text="&#xf084;" margin="0" borderRadius="50" width="30" height="30"
-                        class="fas t-white bg h4 center middle" (tap)="formgantipassword()"></Button>
+                        class="fas t-white bg h4 center middle" ></Button>
                     <Label col="1" text="Ganti Password" textWrap="true" class="h4 middle"
-                        (tap)="formgantipassword()"></Label>
+                        ></Label>
                 </GridLayout>
                 <GridLayout row="0" columns="60,*" class="bg-content" padding="2" margin="10 20 10 20"
-                    androidElevation="5">
+                    androidElevation="5"  (tap)="bukaEdit()">
                     <Button col="0" text="&#xf044;" margin="0" borderRadius="50" width="30" height="30"
-                        class="fas t-white bg h4 center middle" (tap)="bukaEdit()"></Button>
-                    <Label col="1" text="Edit Profil" textWrap="true" class="h4 middle" (tap)="bukaEdit()"></Label>
+                        class="fas t-white bg h4 center middle"></Button>
+                    <Label col="1" text="Edit Profil" textWrap="true" class="h4 middle" ></Label>
                 </GridLayout>
                 <GridLayout row="2" columns="60,*" class="bg-content" padding="2" margin="10 20 10 20"
-                    androidElevation="5">
+                    androidElevation="5" [nsRouterLink]="['/transaksi']">
+                    <Button col="0" text="&#xf02f;" margin="0" borderRadius="50" width="30" height="30"
+                        class="fas t-white bg h4 center middle"></Button>
+                    <Label col="1" text="Setting Printer" textWrap="true" class="h4 middle"></Label>
+                </GridLayout>
+                <GridLayout row="3" columns="60,*" class="bg-content" padding="2" margin="10 20 10 20"
+                    androidElevation="5"  (tap)="logout()">
                     <Button col="0" text="&#xf011;" margin="0" borderRadius="50" width="30" height="30"
-                        class="fas t-white bg h4 center middle" (tap)="logout()"></Button>
-                    <Label col="1" text="logout" textWrap="true" class="h4 middle" (tap)="bukaEdit()"></Label>
+                        class="fas t-white bg h4 center middle" ></Button>
+                    <Label col="1" text="Logout" textWrap="true" class="h4 middle"></Label>
                 </GridLayout>
             </GridLayout>
             <GridLayout>

@@ -1,0 +1,15 @@
+<GridLayout class="page" rows="auto, *, auto" columns="*">
+    <GridLayout row="0" rows="auto, auto" columns="*">
+        <Button *ngIf="!selected" row="0" class="btn btn-primary" text="Search Printers"
+            (tap)="searchPrinters()"></Button>
+        <Button *ngIf="selected" row="0" class="btn btn-primary" text="Disconnect" (tap)="disconnect()"></Button>
+        <Label row="1" [text]="connected" class="text-center"></Label>
+    </GridLayout>
+
+    <ListView row="1" [items]="items" class="list-group" *ngIf="!selected">
+        <ng-template let-item="item">
+            <Label text="{{item.modelName}} ({{item.portName}})" class="list-group-item" (tap)="connect(item)"></Label>
+        </ng-template>
+    </ListView>
+
+</GridLayout>

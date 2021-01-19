@@ -4,13 +4,14 @@
             <GridLayout row="0" rows="auto,auto,auto" class="bg-content middle" margin="15" padding="10">
                 <GridLayout row="0" width="100" height="100" rows="*" borderRadius="25" margin="15" class="labels">
                     <StackLayout class="middle" row="0">
-                        <Label row="0" text="Sikedai" class="h2 span center middle bold t-color"></Label>
+                        <Image src="~/app/asset/icon.png" stretch="aspectFill" width="150"
+                            height="150" ></Image>
                     </StackLayout>
                 </GridLayout>
                 <StackLayout row="1" *ngIf="!lupaForm">
                     <Label class="text-center h2" text="Sign-In"></Label>
-                    <TextField padding="15" margin="15" androidElevation="5" [(ngModel)]="email"
-                        hint="&#xf0e0; Email" class="input fas"></TextField>
+                    <TextField padding="15" margin="15" androidElevation="5" [(ngModel)]="email" hint="&#xf0e0; Email"
+                        class="input fas"></TextField>
                     <TextField padding="15" margin="15" androidElevation="5" [(ngModel)]="password"
                         hint="&#xf084; Password" class="input fas" secure="true"></TextField>
                     <GridLayout rows="auto">
@@ -18,10 +19,10 @@
                     </GridLayout>
                     <Label text="Lupa Password ?" class="right t-link" (tap)="lupaOn()" paddingRight="20"></Label>
                 </StackLayout>
-                <StackLayout row="1"  *ngIf="lupaForm">
+                <StackLayout row="1" *ngIf="lupaForm">
                     <Label class="text-center h2" text="Lupa Password"></Label>
-                    <TextField padding="15" margin="15" androidElevation="5" [(ngModel)]="email"
-                        hint="&#xf0e0; Email" class="input fas"></TextField>
+                    <TextField padding="15" margin="15" androidElevation="5" [(ngModel)]="email" hint="&#xf0e0; Email"
+                        class="input fas"></TextField>
                     <GridLayout rows="auto">
                         <Button row="0" text="Kirim" class="btn" (tap)="kirim()"></Button>
                     </GridLayout>

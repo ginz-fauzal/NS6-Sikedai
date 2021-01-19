@@ -1,0 +1,97 @@
+<ScrollView class="bg-page" scrollBarIndicatorVisible="false">
+    <GridLayout rows="auto,auto,auto,auto,auto" visibility="{{ !isBusy ? 'visible' : 'collapsed' }}">
+        <GridLayout marginBottom="5" row="0" rows="auto,auto" columns="*,auto" class="bg-content">
+            <Label row="0" col="0" margin="10 0 10 20" text="Laporan Transaksi" class="fas h2 t-index ver bold"></Label>
+        </GridLayout>
+        <GridLayout row="1" row="1" rows="auto,auto," columns="auto,*" class="bg-content" margin="15">
+            <GridLayout columns="*,*" row="0" colSpan="2" col="0" padding="10">
+                <StackLayout col="0">
+                    <Label class="h4 bold" text="Tanggal Awal"></Label>
+                    <GridLayout columns="*,auto" padding="10" (tap)="onPickDateTap($event,1)">
+                        <Label col="0" [text]="tanggal1" class="text-center"></Label>
+                        <Label col="1" class="h3 bold text-center fas" text="&#xf073;"></Label>
+                    </GridLayout>
+                </StackLayout>
+                <StackLayout col="1">
+                    <Label class="h4 bold" text="Tanggal Akhir"></Label>
+                    <GridLayout columns="*,auto" padding="10" (tap)="onPickDateTap($event,2)">
+                        <Label col="0" [text]="tanggal2" class="text-center"></Label>
+                        <Label col="1" class="h3 bold text-center fas" text="&#xf073;"></Label>
+                    </GridLayout>
+                </StackLayout>
+            </GridLayout>
+            <RadCartesianChart row="1" colSpan="2" col="0" tkExampleTitle tkToggleNavButton height="200"
+                allowAnimation="true">
+                <CategoricalAxis tkCartesianHorizontalAxis allowPan="true" allowZoom="true"></CategoricalAxis>
+                <LinearAxis tkCartesianVerticalAxis labelFormat=" "></LinearAxis>
+                <SplineAreaSeries tkCartesianSeries seriesName="SpLine" [items]="lineSource" showLabels="true"
+                    categoryProperty="Bulan" valueProperty="Cost">
+                    <PointLabelStyle tkSplineAreaLabelStyle textFormat="%,.0f" margin="10" fontStyle="Bold"
+                        fillColor="#b2ffc5" textSize="10" textColor="#556080"></PointLabelStyle>
+                </SplineAreaSeries>
+                <Palette tkCartesianPalette seriesName="SpLine">
+                    <PaletteEntry tkCartesianPaletteEntry strokeColor="#b7d6ff" fillColor="#b7d6ff">
+                    </PaletteEntry>
+                </Palette>
+            </RadCartesianChart>
+        </GridLayout>
+
+        <StackLayout row="2" class="bg-content" margin="0 15 0 15" padding="10">
+            <Label class="h4 bold text-center " text="Detail Laporan"></Label>
+            <GridLayout colums="auto,*">
+                <StackLayout col="0">
+                    <Label class="h3 bold " text="Pendapatan"></Label>
+                    <Label class="h3 bold " text="Keuntungan"></Label>
+                    <Label class="h3 bold " text="Jumlah transaksi"></Label>
+                    <Label class="h3 bold " text="Barang terjual"></Label>
+                </StackLayout>
+                <StackLayout col="1">
+                    <Label class="h3 right" text="Rp {{pendapatan}}"></Label>
+                    <Label class="h3 right" text="Rp {{keuntungan}}"></Label>
+                    <Label class="h3 right" text="{{transaksi}}"></Label>
+                    <Label class="h3 right" text="{{terjual}} Item"></Label>
+                </StackLayout>
+            </GridLayout>
+        </StackLayout>
+
+        <GridLayout row="4" rows="auto,auto" class="bg-content" margin="15" padding="10">
+            <StackLayout row="0">
+                <Label class="h4 bold text-center " text="Data Struk"></Label>
+                <TextField [(ngModel)]="cari" padding="15" margin="15" (textChange)="pencarian($event)"
+                    hint="&#xf002; Cari Kode Transaksi ..." class="input fas">
+                </TextField>
+            </StackLayout>
+            <ScrollView row="2" orientation="horizontal">
+                <StackLayout orientation="horizontal">
+                    <GridLayout *ngFor="let item of data" rows="auto,auto,auto,auto,auto" class="borders"
+                        marginLeft="10">
+                        <StackLayout row="0">
+                            <Label class="h4 text-center" text="{{item.Kode_struk}}"></Label>
+                            <Label class="h6 text-center" text="{{item.Tanggal}} {{item.Waktu}}"></Label>
+                        </StackLayout>
+                        <GridLayout columns="auto,80" row="1">
+                            <Label col="0" class="h6" text="Jumlah item :"></Label>
+                            <Label col="1" class="h6 right" text="{{item.Item}}"></Label>
+                        </GridLayout>
+                        <GridLayout columns="auto,80" row="2">
+                            <Label col="0" class="h6" text="Pendapatan : "></Label>
+                            <Label col="1" class="h6 right" text="Rp {{formatDollar(item.Pendapatan)}}"></Label>
+                        </GridLayout>
+                        <GridLayout columns="auto,80" row="3">
+                            <Label col="0" class="h6" text="Keuntungan : "></Label>
+                            <Label col="1" class="h6 right" text="Rp {{formatDollar(item.Keuntungan)}}"></Label>
+                        </GridLayout>
+                        <Button row="4" class="btn h4" height="32" text=" Lihat Detail "
+                            (tap)="showstruk(item.Kode)"></Button>
+                    </GridLayout>
+                </StackLayout>
+            </ScrollView>
+        </GridLayout>
+
+    </GridLayout>
+</ScrollView>
+<DockLayout style="vertical-align: middle;">
+    <ActivityIndicator row="1" visibility="{{ isBusy ? 'visible' : 'collapsed' }}" #activityIndicator busy="true"
+        width="100" height="100" class="activity-indicator">
+    </ActivityIndicator>
+</DockLayout>

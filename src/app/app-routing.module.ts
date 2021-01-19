@@ -13,6 +13,8 @@ const routes: Routes = [
     { path: "barang", loadChildren: () => import("~/app/page/manajemen/barang/barang.module").then((m) => m.BarangModule) },
     { path: "stok", loadChildren: () => import("~/app/page/manajemen/stok/stok.module").then((m) => m.StokModule) },
     { path: "laporan", loadChildren: () => import("~/app/page/laporan/laporan.module").then((m) => m.LaporanModule) },
+    { path: "laptransaksi", loadChildren: () => import("~/app/page/laporan/laptransaksi/laptransaksi.module").then((m) => m.LaptransaksiModule) },
+    { path: "transaksi", loadChildren: () => import("~/app/page/setting/transaksi.module").then((m) => m.TransaksiModule) },
 ];
 
 @NgModule({

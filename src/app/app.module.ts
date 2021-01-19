@@ -6,6 +6,7 @@ import { NativeScriptHttpClientModule } from "nativescript-angular/http-client";
 import { NativeScriptAnimationsModule } from "nativescript-angular/animations";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
+import { NativeScriptDateTimePickerModule } from "nativescript-datetimepicker/angular";
 import { BottomNavigationComponent } from "./komponen/bottom-navigation.component";
 
 
@@ -19,7 +20,8 @@ import { BottomNavigationComponent } from "./komponen/bottom-navigation.componen
         NativeScriptFormsModule,
         NativeScriptHttpClientModule,
         NativeScriptCommonModule,
-        NativeScriptAnimationsModule
+        NativeScriptAnimationsModule,
+        NativeScriptDateTimePickerModule
     ],
     providers: [],
     declarations: [

@@ -1,9 +1,14 @@
-<GridLayout rows="auto,*,auto" class="bg-page" visibility="{{ !isBusy && !bayar ? 'visible' : 'collapsed' }}">
+<GridLayout rows="auto,auto,*,auto" class="bg-page" visibility="{{ !isBusy && !bayar ? 'visible' : 'collapsed' }}">
     <GridLayout marginBottom="5" row="0" columns="*,auto" class="bg-content">
         <Label col="0" margin="10 0 10 20" text="Transaksi Toko" class="fas h2 t-index ver bold"></Label>
-        <Label col="1" text="&#xf0f3;" margin="10 20 0 0" class="fas ver center t-index h2"></Label>
+        <!-- <Label col="1" text="&#xf0f3;" margin="10 20 0 0" class="fas ver center t-index h2"></Label> -->
     </GridLayout>
-    <ScrollView row="1">
+    <StackLayout row="1">
+        <TextField [(ngModel)]="cari" padding="15" margin="15" (textChange)="pencarian($event)"
+            hint="&#xf002; Cari Barang ..." class="input fas">
+        </TextField>
+    </StackLayout>
+    <ScrollView row="2">
         <StackLayout>
             <StackLayout>
                 <GridLayout *ngFor="let item of data" visibility="{{ item.stok!=0 ? 'visible' : 'collapsed' }}"
@@ -18,8 +23,8 @@
                     <GridLayout verticalAlignment="bottom" col="2" columns="auto,60,auto">
                         <Label col="0" text="&#xf146;" (tap)="kurang(item.index)"
                             class="fas middle right h2 t-color"></Label>
-                        <TextField padding="0" col="1" text="{{item.jumlah}}" keyboardType="number"
-                            class="h3 text-center middle">
+                        <TextField padding="0" col="1" keyboardType="number" (returnPress)="onReturnPress($event,item.index)"
+                            class="h3 text-center middle" [(ngModel)]="item.jumlah" returnKeyType="done">
                         </TextField>
                         <Label col="2" text="&#xf0fe;" (tap)="tambah(item.index)"
                             class="fas middle left h2 t-color"></Label>
@@ -28,7 +33,7 @@
             </StackLayout>
         </StackLayout>
     </ScrollView>
-    <GridLayout row="2" class="bg-content" columns="*,auto">
+    <GridLayout row="3" class="bg-content" columns="*,auto">
         <StackLayout col="0" paddingLeft="20">
             <Label class="bold h3" text="Jml Barang : {{formatDollar(jumlah)}}"></Label>
             <Label class="bold h3" text="Total : Rp {{formatDollar(total)}}"></Label>
