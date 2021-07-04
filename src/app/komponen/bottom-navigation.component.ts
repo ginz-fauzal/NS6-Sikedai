@@ -9,12 +9,11 @@ import * as ApplicationSettings from "tns-core-modules/application-settings";
 	selector: "app-bottom-navigation",
 	moduleId: module.id,
 	templateUrl: "./bottom-navigation.component.html",
-    styleUrls: ['bottom-navigation.component.css']
 })
 export class BottomNavigationComponent implements OnInit {
 	hidden:boolean;
 	private _activatedUrl: string;
-	
+
 	constructor(
 		private router: Router,
 		private routerExtensions: RouterExtensions) {

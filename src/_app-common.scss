@@ -16,3 +16,60 @@
 .far {
     font-family: "Font Awesome 5 Free", "fa-regular-400";
 }
+
+.bottom-navigation {
+    text-align: center;
+    border-top-width: 2;
+    border-top-color: whitesmoke;
+    background-color: white;
+}
+
+.bottom-navigation .bottom-navigation-item .fas {
+    font-size: 20;
+    padding: 10 5 5 5;
+    color: #FF6321;
+}
+
+.bottom-navigation .bottom-navigation-item .label {
+    font-size: 12;
+    padding: 0 5 5 5;
+    color: #FF6321;
+}
+
+.bottom-navigation .bottom-navigation-item.selected {
+    // background-color:#FF6321;
+    color: #FF6321;
+}
+
+.bottom-navigation .bottom-navigation-item.selected .fas {
+    animation-name: slide-ups;
+    animation-iteration-count: 1;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    border-top-color: #FF6321;
+    border-top-width: 3;
+    // background-color:#FF6321;
+    margin: 0;
+    color: #FF6321;
+    font-size: 20;
+    padding: 10 5 5 5;
+}
+
+.bottom-navigation .bottom-navigation-item.selected .label {
+    font-size: 12;
+    padding: 0 5 5 5;
+    color: #FF6321;
+}
+
+
+@keyframes slide-ups {
+    from {
+        transform: translateY(-10);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
